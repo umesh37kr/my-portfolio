@@ -1,3 +1,4 @@
+"use client";
 import Image from "next/image";
 import Header from "./components/header";
 import {
@@ -25,6 +26,35 @@ import { SiPostman } from "react-icons/si";
 import { BiLogoMongodb, BiLogoTypescript } from "react-icons/bi";
 
 export default function Home() {
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    console.log("e:", e.target[0].value);
+    const to = "umesh37kr@gmail.com";
+    const subject = "I have something";
+    const text = "my first email test";
+    try {
+      const response = await fetch("api/send-email", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ to, subject, text }),
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        console.log("Email sent successfully!");
+        // setStatus("Email sent successfully!");
+      } else {
+        console.log(`Failed to send email: ${data.error}`);
+        // setStatus(`Failed to send email: ${data.error}`);
+      }
+    } catch (error) {
+      console.log(`Failed to send email: ${error.message}`);
+      // setStatus(`Failed to send email: ${error.message}`);
+    }
+  };
   return (
     <>
       <Header />
@@ -41,7 +71,7 @@ export default function Home() {
               <h2 className="mt-5 text-2xl font-bold leading-tight text-black dark:text-white sm:text-3xl lg:text-4xl">
                 Hey 👋 I am
                 <br className="block sm:hidden" />
-                Jenny Carter
+                Umesh Kumar
               </h2>
               <p className="max-w-lg mt-3 text-xl leading-relaxed text-justify text-gray-600 dark:text-gray-300 md:mt-8">
                 Hello! {`I'm`} Umesh Kumar, a passionate and creative Web
@@ -287,7 +317,7 @@ export default function Home() {
                 <h2 className="mb-4 text-2xl font-bold dark:text-white">
                   Ready to Get Started?
                 </h2>
-                <form id="contactForm">
+                <form onSubmit={handleSubmit} id="contactForm">
                   <div className="mb-6">
                     <div className="mx-0 mb-1 sm:mb-4">
                       <div className="mx-0 mb-1 sm:mb-4">
