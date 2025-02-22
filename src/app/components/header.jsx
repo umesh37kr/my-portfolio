@@ -141,7 +141,7 @@ const Header = () => {
           <div class="xl:max-w-[30%] md:max-w-[30%] h-fit hidden md:block ">
             <Image
               class="rounded-sm rounded-br-[5rem] rounded-tl-[5rem]"
-              src={"https://techakim.com/sam/tg/7268/li/imgs/profile.jpg"}
+              src="/passport.jpeg"
               width={900}
               height={900}
               alt="My Pic"
